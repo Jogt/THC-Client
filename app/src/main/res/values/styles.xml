@@ -19,7 +19,7 @@
     </style>
 
     <style name="YouDiedButton" parent="BigButton">
-        <item name="android:textColor">#FF0F0F</item>
+        <item name="android:textColor">@android:color/holo_red_dark</item>
         <item name="android:textSize">50dp</item>
         <item name="android:fontFamily">@font/optimusprinceps</item>
     </style>
