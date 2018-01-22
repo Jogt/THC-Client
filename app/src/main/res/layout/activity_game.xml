@@ -5,7 +5,7 @@
     android:id="@+id/gameRootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="de.lars_kadel.de.thc.Game">
+    tools:context="de.lars_kadel.thc.Game">
 
     <TextView
         android:id="@+id/nameText"

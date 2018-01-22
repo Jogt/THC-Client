@@ -1,9 +1,6 @@
-package de.lars_kadel.de.thc;
+package de.lars_kadel.thc;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -62,10 +59,7 @@ public class Game extends AppCompatActivity {
 
 
     @Override
-    public void onBackPressed() {
-        Intent i = new Intent(this, ServerConnector.class);
-      //  startActivity(i);
-    }
+    public void onBackPressed(){}
 
     public void onClick_youDied(View v){
         if(!dead) {

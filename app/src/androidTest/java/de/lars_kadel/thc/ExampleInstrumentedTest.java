@@ -1,4 +1,4 @@
-package de.lars_kadel.de.thc;
+package de.lars_kadel.thc;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("de.lars_kadel.de.thc", appContext.getPackageName());
+        assertEquals("de.lars_kadel.thc", appContext.getPackageName());
     }
 }

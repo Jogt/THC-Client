@@ -1,4 +1,4 @@
-package de.lars_kadel.de.thc;
+package de.lars_kadel.thc;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package de.lars_kadel.de.thc;
+package de.lars_kadel.thc;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Lobby extends AppCompatActivity {

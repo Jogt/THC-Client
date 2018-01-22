@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="de.lars_kadel.de.thc.ServerConnector">
+    tools:context="de.lars_kadel.thc.ServerConnector">
 
     <EditText
         android:id="@+id/nameInput"

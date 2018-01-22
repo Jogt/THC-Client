@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="de.lars_kadel.de.thc">
+    package="de.lars_kadel.thc">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,15 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ServerConnector">
+        <activity android:name="de.lars_kadel.de.de.lars_kadel.thc.ServerConnector">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Lobby" />
-        <activity android:name=".Game"></activity>
+        <activity android:name="de.lars_kadel.de.de.lars_kadel.thc.Lobby" />
+        <activity android:name="de.lars_kadel.de.de.lars_kadel.thc.Game"></activity>
     </application>
 
 </manifest>
