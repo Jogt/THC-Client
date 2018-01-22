@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">THC</string>
+    <string name="address">Address</string>
+    <string name="name">Name</string>
+    <string name="connect">Connect</string>
+    <string name="ready">Ready</string>
+    <string name="start">Start</string>
+    <string name="revealrole">Reveal Role</string>
+    <string name="youdied">You died</string>
+    <string name="endgame">Stop Game</string>
+</resources>
