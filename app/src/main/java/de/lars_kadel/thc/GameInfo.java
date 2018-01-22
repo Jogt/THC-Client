@@ -18,6 +18,7 @@ public class GameInfo implements Parcelable{
     public final String[] traitors;
     public final String name;
     public final Role role;
+    public final long startTime;
 
     public GameInfo(int pt, int gt, String[] ds, String[] ts, String n, Role r){
         this.prepTime = pt;
@@ -26,6 +27,7 @@ public class GameInfo implements Parcelable{
         this.traitors = ts;
         this.name = n;
         this.role = r;
+        startTime = System.currentTimeMillis();
     }
 
     protected GameInfo(Parcel in) {
@@ -35,6 +37,7 @@ public class GameInfo implements Parcelable{
         traitors = in.createStringArray();
         name = in.readString();
         role = Role.valueOf(in.readString());
+        startTime = in.readLong();
     }
 
     public static final Creator<GameInfo> CREATOR = new Creator<GameInfo>() {
@@ -62,5 +65,6 @@ public class GameInfo implements Parcelable{
         parcel.writeStringArray(traitors);
         parcel.writeString(name);
         parcel.writeString(role.toString());
+        parcel.writeLong(startTime);
     }
 }

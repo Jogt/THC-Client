@@ -15,11 +15,12 @@ public class Game extends AppCompatActivity {
     private GameInfo gameInfo;
     private TextView nameText;
     private Button revealRoleButton;
+    private TextView timeStatusText;
+    private TextView timeText;
     private TextView detectiveText;
     private TextView traitorText;
     private Button youDiedButton;
     private String tText;
-    private ConstraintLayout rootLayout;
     private boolean dead;
 
     @Override
@@ -30,10 +31,11 @@ public class Game extends AppCompatActivity {
         dead = false;
         nameText = findViewById(R.id.nameText);
         revealRoleButton = findViewById(R.id.roleButton);
+        timeStatusText = findViewById(R.id.timeStatusText);
+        timeText = findViewById(R.id.timeText);
         detectiveText = findViewById(R.id.detectiveText);
         traitorText = findViewById(R.id.traitorText);
         youDiedButton = findViewById(R.id.youDiedButton);
-        rootLayout = findViewById(R.id.gameRootLayout);
 
         nameText.setText(gameInfo.name);
         String dText = "";
@@ -74,6 +76,45 @@ public class Game extends AppCompatActivity {
             }
         });
 
+        Thread t = new Thread() {
+
+            @Override
+            public void run() {
+                try {
+                    while (!isInterrupted()) {
+                        Thread.sleep(100);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                long time = System.currentTimeMillis()/1000;
+                                if(time <= gameInfo.startTime/1000+gameInfo.prepTime){
+                                    String min = ""+(gameInfo.startTime/1000+gameInfo.prepTime-time)/60;
+                                    String sec = ""+(gameInfo.startTime/1000+gameInfo.prepTime-time)%60;
+                                    if(min.length()<2){min = "0"+min;}
+                                    if(sec.length()<2){sec = "0"+sec;}
+                                    timeStatusText.setText(getText(R.string.preptime));
+                                    timeText.setText(min+":"+sec);
+                                }else if(time <= gameInfo.startTime/1000+gameInfo.gameTime){
+                                    String min = ""+(gameInfo.startTime/1000+gameInfo.gameTime-time)/60;
+                                    String sec = ""+(gameInfo.startTime/1000+gameInfo.gameTime-time)%60;
+                                    if(min.length()<2){min = "0"+min;}
+                                    if(sec.length()<2){sec = "0"+sec;}
+                                    timeStatusText.setText(getText(R.string.gametime));
+                                    timeText.setText(min+":"+sec);
+                                }else{
+                                    timeStatusText.setText(getText(R.string.roundover));
+                                    timeText.setText("");
+                                }
+                            }
+                        });
+                    }
+                } catch (InterruptedException e) {
+                }
+            }
+        };
+
+        t.start();
+
 
     }
 
@@ -85,7 +126,7 @@ public class Game extends AppCompatActivity {
         if(!dead) {
             tText = "";
             dead = true;
-            youDiedButton.setTextAppearance(android.R.style.TextAppearance_DeviceDefault_Large);
+            youDiedButton.setTextAppearance(R.style.TextAppearance_AppCompat);
             youDiedButton.setText(R.string.endgame);
         }else{
             Intent i = new Intent(this, ServerConnector.class);

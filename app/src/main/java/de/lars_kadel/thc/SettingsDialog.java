@@ -3,6 +3,7 @@ package de.lars_kadel.thc;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
@@ -36,6 +37,7 @@ public class SettingsDialog extends AppCompatDialogFragment {
         gametimeSlider = v.findViewById(R.id.gametimeSlider);
         tratioSlider = v.findViewById(R.id.tratioSlider);
         dratioSlider = v.findViewById(R.id.dratioSlider);
+
         SeekBar.OnSeekBarChangeListener listener = new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int value, boolean byUser) {
@@ -65,12 +67,18 @@ public class SettingsDialog extends AppCompatDialogFragment {
         tratioSlider.setOnSeekBarChangeListener(listener);
         dratioSlider.setOnSeekBarChangeListener(listener);
 
+        preptimeSlider.setProgress(30);
+        gametimeSlider.setProgress(60);
+        tratioSlider.setProgress(35);
+        dratioSlider.setProgress(26);
+
+
         builder.setView(v)
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         parent.sendSettings(preptimeSlider.getProgress(),
-                                            gametimeSlider.getProgress(),
+                                            gametimeSlider.getProgress()*10,
                                             tratioSlider.getProgress(),
                                             dratioSlider.getProgress());
                         getDialog().dismiss();
