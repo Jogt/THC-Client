@@ -8,10 +8,20 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="YouDiedButton" parent="Base.TextAppearance.AppCompat.Button">
-        <item name="android:textColor">#FF0F0F</item>
-        <item name="android:fontFamily">@font/optimusprinceps</item>
+
+
+    <style name="BigButtonText" parent="TextAppearance.AppCompat.Widget.Button">
         <item name="android:textSize">40dp</item>
+    </style>
+
+    <style name="BigButton" parent="Base.Widget.AppCompat.Button">
+        <item name="android:textAppearance">@style/BigButtonText</item>
+    </style>
+
+    <style name="YouDiedButton" parent="BigButton">
+        <item name="android:textColor">#FF0F0F</item>
+        <item name="android:textSize">50dp</item>
+        <item name="android:fontFamily">@font/optimusprinceps</item>
     </style>
 
 </resources>

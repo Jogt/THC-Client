@@ -38,13 +38,13 @@ public class Game extends AppCompatActivity {
         youDiedButton = findViewById(R.id.youDiedButton);
 
         nameText.setText(gameInfo.name);
-        String dText = "";
+        String dText = "Detectives:\n";
         for(String s : gameInfo.detectives){
             dText += s +"\n";
         }
         detectiveText.setText(dText);
 
-        tText = "";
+        tText = "Traitors:\n";
         for(String s : gameInfo.traitors){
             tText += s + "\n";
         }
@@ -125,8 +125,10 @@ public class Game extends AppCompatActivity {
     public void onClick_youDied(View v){
         if(!dead) {
             tText = "";
+            traitorText.setText(tText);
+            detectiveText.setText("");
             dead = true;
-            youDiedButton.setTextAppearance(R.style.TextAppearance_AppCompat);
+            youDiedButton.setTextAppearance(R.style.BigButtonText);
             youDiedButton.setText(R.string.endgame);
         }else{
             Intent i = new Intent(this, ServerConnector.class);

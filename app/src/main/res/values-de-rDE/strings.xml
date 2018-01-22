@@ -8,7 +8,7 @@
     <string name="start">Start</string>
     <string name="revealrole">Rolle anzeigen</string>
     <string name="youdied">You died</string>
-    <string name="endgame">Stoppe das Spiel</string>
+    <string name="endgame">Stop</string>
     <string name="settings">Einstellungen</string>
     <string name="preptime">Vorbereitungszeit</string>
     <string name="gametime">Spielzeit</string>
@@ -17,4 +17,6 @@
     <string name="ok">Ok</string>
     <string name="cancel">Abbrechen</string>
     <string name="roundover">Runde vorbei</string>
+    <string name="detectives">Detectives</string>
+    <string name="traitors">Traitors</string>
 </resources>
