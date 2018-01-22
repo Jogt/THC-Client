@@ -6,14 +6,20 @@ import android.os.Parcelable;
 
 public class GameInfo implements Parcelable{
 
+    public enum Role{
+        traitor,
+        innocent,
+        detective,
+    }
+
     public final int prepTime;
     public final int gameTime;
     public final String[] detectives;
     public final String[] traitors;
     public final String name;
-    public final Player.Role role;
+    public final Role role;
 
-    public GameInfo(int pt, int gt, String[] ds, String[] ts, String n, Player.Role r){
+    public GameInfo(int pt, int gt, String[] ds, String[] ts, String n, Role r){
         this.prepTime = pt;
         this.gameTime = gt;
         this.detectives = ds;
@@ -28,7 +34,7 @@ public class GameInfo implements Parcelable{
         detectives = in.createStringArray();
         traitors = in.createStringArray();
         name = in.readString();
-        role = Player.Role.valueOf(in.readString());
+        role = Role.valueOf(in.readString());
     }
 
     public static final Creator<GameInfo> CREATOR = new Creator<GameInfo>() {

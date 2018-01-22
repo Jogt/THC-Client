@@ -1,6 +1,7 @@
 package de.lars_kadel.thc;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -50,7 +51,26 @@ public class Game extends AppCompatActivity {
             @SuppressLint("ResourceAsColor")
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                return checkRoleButton();
+                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN){
+                    switch (gameInfo.role) {
+                        case traitor:
+                            revealRoleButton.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+                            traitorText.setText(tText);
+                            break;
+                        case innocent:
+                            revealRoleButton.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
+                            break;
+                        case detective:
+                            revealRoleButton.setTextColor(getResources().getColor(android.R.color.holo_blue_dark));
+                            break;
+                    }
+                    revealRoleButton.setText(gameInfo.role.toString());
+                }else{
+                    revealRoleButton.setText(R.string.revealrole);
+                    revealRoleButton.setTextColor(getResources().getColor(android.R.color.white));
+                    traitorText.setText("");
+                }
+                return false;
             }
         });
 
@@ -65,33 +85,13 @@ public class Game extends AppCompatActivity {
         if(!dead) {
             tText = "";
             dead = true;
-            revealRoleButton.setTextAppearance(android.R.style.TextAppearance_DeviceDefault_Widget_Button);
+            youDiedButton.setTextAppearance(android.R.style.TextAppearance_DeviceDefault_Large);
             youDiedButton.setText(R.string.endgame);
-        }
-    }
-
-    private boolean checkRoleButton(){
-        if(revealRoleButton.isPressed()){
-            switch (gameInfo.role) {
-                case traitor:
-                    revealRoleButton.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
-                    traitorText.setText(tText);
-                    break;
-                case innocent:
-                    revealRoleButton.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
-                    break;
-                case detective:
-                    revealRoleButton.setTextColor(getResources().getColor(android.R.color.holo_blue_dark));
-                    break;
-            }
-            revealRoleButton.setText(gameInfo.role.toString());
         }else{
-            revealRoleButton.setText(R.string.revealrole);
-            revealRoleButton.setTextColor(getResources().getColor(android.R.color.white));
-            traitorText.setText("");
+            Intent i = new Intent(this, ServerConnector.class);
+            startActivity(i);
         }
-        return true;
-
     }
+
 
 }

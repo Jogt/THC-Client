@@ -9,4 +9,11 @@
     <string name="revealrole">Rolle anzeigen</string>
     <string name="youdied">You died</string>
     <string name="endgame">Stoppe das Spiel</string>
+    <string name="settings">Einstellungen</string>
+    <string name="preptime">Vorbereitungszeit</string>
+    <string name="gametime">Spielzeit</string>
+    <string name="tratio">T-Ratio</string>
+    <string name="dratio">D-Ratio</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Abbrechen</string>
 </resources>

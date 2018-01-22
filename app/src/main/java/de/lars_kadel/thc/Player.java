@@ -20,19 +20,12 @@ class Player {
         return name;
     }
 
-    public enum Role{
-        traitor,
-        innocent,
-        detective,
-    }
+
 
     private int id;
     private String name;
-    private Role role;
     private boolean isLeader;
     private boolean ready;
-    private ArrayList<String> detectives;
-    private ArrayList<String> traitors;
 
 
     public Player(int id, String name, boolean isLeader, boolean ready){

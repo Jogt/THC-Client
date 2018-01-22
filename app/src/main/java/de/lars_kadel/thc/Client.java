@@ -31,7 +31,6 @@ public class Client extends AsyncTask<String, Player, GameInfo>{
         socket = new Socket();
         playerList = new ArrayList<>();
         lobby.updateListView(playerList);
-        name = lobby.getName();
     }
 
     @Override
@@ -52,10 +51,11 @@ public class Client extends AsyncTask<String, Player, GameInfo>{
 
     @Override
     protected GameInfo doInBackground(String... strings) {
+        name = strings[1];
         try {
             socket.setSoTimeout(100);
             socket.connect(new InetSocketAddress(strings[0], 2307));
-            socket.getOutputStream().write(strings[1].getBytes());
+            socket.getOutputStream().write(name.getBytes());
         } catch (IOException e) {
             cancel(false);
             e.printStackTrace();
@@ -63,6 +63,7 @@ public class Client extends AsyncTask<String, Player, GameInfo>{
         while(!done){
             updateReady();
             checkStart();
+            checkSettings();
             listenToServer();
             if(isCancelled()){
                 return null;
@@ -85,6 +86,7 @@ public class Client extends AsyncTask<String, Player, GameInfo>{
 
     private void checkStart(){
         if(lobby.start){
+            lobby.start = false;
             try{
                 socket.getOutputStream().write("start;".getBytes());
             }catch(IOException e){
@@ -94,6 +96,24 @@ public class Client extends AsyncTask<String, Player, GameInfo>{
         }
     }
 
+    private void checkSettings(){
+        if(lobby.settings != null){
+            int ptime = lobby.settings.preptime;
+            int gtime = lobby.settings.gametime;
+            int tratio = lobby.settings.tratio;
+            int dratio = lobby.settings.dratio;
+            lobby.settings = null;
+            try{
+                socket.getOutputStream().write(("preptime:"+ptime+";"+
+                        "gametime:"+gtime+";"+
+                        "tratio:"+tratio+";"+
+                        "dratio:"+dratio+";").getBytes());
+            }catch(IOException e){
+                e.printStackTrace();
+                cancel(false);
+            }
+        }
+    }
 
     private void listenToServer(){
         try{
@@ -162,7 +182,7 @@ public class Client extends AsyncTask<String, Player, GameInfo>{
                 detectives,                     //detectivelist
                 traitors,                       //traitorlist
                 name,                           //name
-                Player.Role.valueOf(role));     //Role
+                GameInfo.Role.valueOf(role));     //Role
         done = true;
     }
 

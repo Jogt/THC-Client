@@ -3,6 +3,7 @@ package de.lars_kadel.thc;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -14,7 +15,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class Lobby extends AppCompatActivity {
+public class Lobby extends AppCompatActivity implements SettingsDialog.SettingsInterface{
 
     private CheckBox readyBox;
     private ListView listView;
@@ -23,6 +24,7 @@ public class Lobby extends AppCompatActivity {
     private Button startButton;
     private String name;
     public boolean start = false;
+    public Settings settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class Lobby extends AppCompatActivity {
         c = new Client(readyBox, this);
         String ip = getIntent().getStringExtra("ip");
         name = getIntent().getStringExtra("name");
+        Log.i("lobby", "Name: "+name);
         String[] args = {ip, name};
         c.execute(args);
     }
@@ -56,6 +59,11 @@ public class Lobby extends AppCompatActivity {
         start = true;
     }
 
+    public void onClick_settings(View v){
+        SettingsDialog settingsDialog = new SettingsDialog();
+        settingsDialog.show(getSupportFragmentManager(), "SettingsDialog");
+    }
+
     public void startGameActivity(GameInfo gi){
         Intent i = new Intent(this, Game.class);
         i.putExtra("gameinfo",gi);
@@ -70,6 +78,11 @@ public class Lobby extends AppCompatActivity {
 
     public String getName(){
         return name;
+    }
+
+    @Override
+    public void sendSettings(int preptime, int gametime, int tratio, int dratio) {
+        settings = new Settings(preptime, gametime, tratio, dratio);
     }
 
     private class LobbyAdapter extends BaseAdapter {
@@ -102,17 +115,31 @@ public class Lobby extends AppCompatActivity {
             }
 
             ((TextView) view.findViewById(R.id.nameField)).setText(players.get(i).getName());
-            // ((TextView) view.findViewById(R.id.nameField)).setText("PENIS");
             if(players.get(i).isLeader()) {
-                ((ImageView) view.findViewById(R.id.leaderImage)).setVisibility(View.VISIBLE);
+                 view.findViewById(R.id.leaderImage).setVisibility(View.VISIBLE);
             }else{
-                ((ImageView) view.findViewById(R.id.leaderImage)).setVisibility(View.GONE);
+                 view.findViewById(R.id.leaderImage).setVisibility(View.GONE);
             }if(players.get(i).isReady()){
                 ((ImageView) view.findViewById(R.id.readyImage)).setImageResource(android.R.drawable.presence_online);
             }else{
                 ((ImageView) view.findViewById(R.id.readyImage)).setImageResource(android.R.drawable.presence_busy);
             }
             return view;
+        }
+    }
+
+    public class Settings{
+
+        public final int preptime;
+        public final int gametime;
+        public final int tratio;
+        public final int dratio;
+
+        public Settings(int preptime, int gametime, int tratio, int dratio){
+            this.preptime = preptime;
+            this.gametime = gametime;
+            this.tratio = tratio;
+            this.dratio = dratio;
         }
     }
 
